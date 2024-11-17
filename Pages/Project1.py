@@ -18,12 +18,14 @@ class Project1:
             df = load_data(upload)
             st.dataframe(df, height=400, width=600)
 
-            years = df['Year'].unique()
-            selected_years = st.multiselect("Select year(s)", options=years, default=years)
+            column = st.selectbox("Choose column for filter", df.columns)
 
-            filtered_df = df[df['Year'].isin(selected_years)]
+            if column:
+                unique_vals = df[column].unique()
+                selected_values = st.multiselect(f"Select values for {column}", options=unique_vals)
 
-            st.dataframe(filtered_df, height=400, width=600)
+                filtered_df = df[df[column].isin(selected_values)]
+                st.dataframe(filtered_df, height=400, width=600)
         else:
             st.warning("Please upload a CSV file")
 
