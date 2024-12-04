@@ -24,7 +24,7 @@ class Project3:
         return df
 
     def plot_bar_chart(self, df, category_column, value_column):
-        df = self.clean_and_convert_values(df, category_column)
+        df = self.clean_and_convert_values(df, value_column)
         if df[category_column].dtype == 'object' or df[category_column].dtype.name == 'category':
             if df[value_column].dtype in ['int64', 'float64']:
                 category_mean = df.groupby(category_column)[value_column].mean()
